@@ -231,9 +231,9 @@ final class Blueprint
 
         $class = PhpCoreExpressions::getClass($target) ?? Name::class;
 
-        $nodes = ServiceContainer::$nodeFinder->findInstanceOf(
+        $nodes = ServiceContainer::$nodeFinder->findInstanceOf( //@phpstan-ignore-line
             $dependOnObject->stmts,
-            $class,
+            $class, //@phpstan-ignore-line
         );
 
         /** @var array<int, Name|Expr> $nodes */

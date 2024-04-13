@@ -77,3 +77,18 @@ arch('value objects')
     ->expect(Targets::class)
     ->toOnlyUse([Expectation::class])
     ->ignoring('PHPUnit\Framework');
+
+arch('avoid mutation unless extending controller')
+    ->expect('Tests\Fixtures\Controllers\Service')
+    ->toHavePrefix('Service')
+    ->toBeReadonly()
+    ->unless([
+        'extends' => Tests\Fixtures\Controller::class,
+        'abstractParent' => true,
+    ]);
+
+arch('avoid mutation if extends')
+    ->expect('Tests\Fixtures\Controllers\Service')
+    ->toHavePrefix('Service')
+    ->toBeReadonly()
+    ->unless('extends');

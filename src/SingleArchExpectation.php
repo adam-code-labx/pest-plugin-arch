@@ -170,4 +170,19 @@ final class SingleArchExpectation implements Contracts\ArchExpectation
             ($this->opposite)(); // @phpstan-ignore-line
         }
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function unless(array|string $expectations): self
+    {
+        $modifier = UnlessModifier::make($this->expectation);
+        $expectations = is_array($expectations) ? $expectations : [$expectations => true];
+
+        $this->ignoring([
+            ...$modifier->targetsToIgnore($expectations, LayerOptions::fromExpectation($this)),
+        ]);
+
+        return $this;
+    }
 }

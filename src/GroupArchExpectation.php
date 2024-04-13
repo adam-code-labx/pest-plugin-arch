@@ -138,4 +138,16 @@ final class GroupArchExpectation implements Contracts\ArchExpectation
             $expectation->ensureLazyExpectationIsVerified();
         }
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function unless(mixed $expectations): self
+    {
+        foreach ($this->expectations as $expectation) {
+            $expectation->unless($expectations);
+        }
+
+        return $this;
+    }
 }

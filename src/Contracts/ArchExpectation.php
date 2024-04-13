@@ -46,4 +46,12 @@ interface ArchExpectation
      * @internal
      */
     public function excludeCallbacks(): array;
+
+    /**
+     * Expectations that the given "targets" or "dependencies" are to ignore.
+     *
+     * @param  array<int, string>|string  $expectations
+     * @return $this
+     */
+    public function unless(array|string $expectations): self;
 }
